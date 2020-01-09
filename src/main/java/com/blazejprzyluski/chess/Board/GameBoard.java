@@ -1,6 +1,10 @@
 package com.blazejprzyluski.chess.Board;
 
 import com.blazejprzyluski.chess.Pieces.*;
+import com.blazejprzyluski.chess.client.Player;
+
+import static com.blazejprzyluski.chess.client.Player.BLACK;
+import static com.blazejprzyluski.chess.client.Player.WHITE;
 
 public class GameBoard
 {
@@ -13,6 +17,8 @@ public class GameBoard
     //variables that determine whether white or black king is beaten
     private boolean whiteKing;
     private boolean blackKing;
+
+    private Player activePlayer;
 
     public GameBoard()
     {
@@ -136,5 +142,17 @@ public class GameBoard
     public void setTurn(int turn)
     {
         this.turn = turn;
+    }
+
+    public Player getActivePlayer() {
+        return activePlayer;
+    }
+
+    public void setActivePlayer() {
+        if (this.activePlayer == WHITE) {
+            this.activePlayer = BLACK;
+        } else {
+            this.activePlayer = WHITE;
+        }
     }
 }

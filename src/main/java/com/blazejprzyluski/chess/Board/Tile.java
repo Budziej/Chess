@@ -5,8 +5,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 
-public class Tile extends Pane
-{
+public class Tile extends Pane {
     private int positionX;
     private int positionY;
     private boolean isOccupied;
@@ -18,19 +17,15 @@ public class Tile extends Pane
         positionY = y;
     }
 
-    public boolean isOccupied()
-    {
+    public boolean isOccupied() {
         return isOccupied;
     }
 
-    public void setPiece(Piece p)
-    {
-        if(p ==  null)
-        {
+    public void setPiece(Piece p) {
+        if (p == null) {
             this.isOccupied = false;
             return;
-        }else
-        {
+        } else {
             this.isOccupied = true;
         }
         this.p = p;
@@ -38,28 +33,23 @@ public class Tile extends Pane
         p.setX(this.getPositionX());
     }
 
-    public Piece getPiece()
-    {
+    public Piece getPiece() {
         return this.p;
     }
 
 
-    public int getPositionX()
-    {
+    public int getPositionX() {
         return positionX;
     }
 
 
-    public int getPositionY()
-    {
+    public int getPositionY() {
         return positionY;
     }
 
     //Adds Imageview as a child and sets it's image via url
-    public void setImage(String url)
-    {
-        if(url  == null)
-        {
+    public void setImage(String url) {
+        if (url == null) {
             this.getChildren().clear();
             return;
         }
