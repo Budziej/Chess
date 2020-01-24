@@ -7,7 +7,6 @@ import java.io.*;
 import java.net.Socket;
 
 public class Client extends Thread {
-    //TODO add check for active player to main method, add move handler
     private Player player;
     private Player activePlayer;
     private PrintWriter pWriter;

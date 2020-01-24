@@ -8,9 +8,9 @@ import com.blazejprzyluski.chess.Pieces.King;
 import com.blazejprzyluski.chess.Pieces.Move;
 import com.blazejprzyluski.chess.client.Client;
 import com.blazejprzyluski.chess.client.Player;
+import com.blazejprzyluski.chess.client.ServerMovesHandler;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -29,14 +29,14 @@ public class BoardView extends Application {
     // the dimensions of our background Image
     private final int BORDER_WIDTH = 320;
     private final int BORDER_HEIGHT = 320;
-    private GameBoard gb = new GameBoard();
+    private static GameBoard gb = new GameBoard();
     private final StackPane mainPane = new StackPane();
     private final GameLogic gameLogic = new GameLogic(gb);
-    private Client chessClient;
+    private final Client chessClient = new Client();
+    private ServerMovesHandler serverMovesHandler = new ServerMovesHandler(chessClient, gb);
 
     @Override
     public void start(Stage stage) throws Exception {
-        chessClient = new Client();
         try {
             chessClient.prepare();
         } catch (IOException e) {
@@ -52,6 +52,7 @@ public class BoardView extends Application {
         // Set the dimensions of the grid
         boardGrid.setPrefSize(BORDER_WIDTH, BORDER_HEIGHT);
 
+        new Thread(serverMovesHandler).start();
         // Use a StackPane to display the Image and the Grid
 
         mainPane.getChildren().addAll(backgroundImageView, boardGrid);
@@ -77,35 +78,15 @@ public class BoardView extends Application {
             t.setPrefSize(tileWidth, tileHeight);
             boardGrid.add(t, t.getPositionX(), t.getPositionY());
         }
-        Task handleMoveFromServer = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-                while (true) {
-                    try {
-                        Move mTM = chessClient.getMoveToMake();
-                        Tile sentTile = gb.getTile(mTM.getFrom() % 8, mTM.getFrom() / 8);
-                        ImageView image = (ImageView) sentTile.getChildren().get(0);
-                        System.out.println("making move");
-                        movePiece(mTM, image);
-                    } catch (NullPointerException ex) {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException exc) {
-                            exc.printStackTrace();
-                        }
-                    }
-                }
-            }
-        };
-
         boardGrid.setOnMouseClicked(e ->
         {
+        //    new Thread(serverMovesHandler).start();
             //if the tile isn't empty
             if (e.getTarget().getClass() != Tile.class) {
                 ImageView img = null;
                 try {
                     img = (ImageView) e.getTarget();
-                } catch (ClassCastException ex) {
+                } catch (ClassCastException ignored) {
 
                 }
                 Tile t = (Tile) img.getParent();
@@ -117,7 +98,6 @@ public class BoardView extends Application {
                         checkMoves(t, e, img);
                     }
                 }
-                new Thread(handleMoveFromServer).start();
                 chessClient.setMoveToMake(null);
             }
         });
@@ -127,13 +107,6 @@ public class BoardView extends Application {
 
     //function that lets player see the moves and make the move, also checks the win condidtion
     private void checkMoves(Tile t, MouseEvent e, ImageView img) {
-        Move mTM = chessClient.getMoveToMake();
-        if(mTM != null) {
-            Tile sentTile = gb.getTile(mTM.getFrom() % 8, mTM.getFrom() / 8);
-            ImageView image = (ImageView) sentTile.getChildren().get(0);
-            System.out.println("making move");
-            movePiece(mTM, image);
-        }
 
         for (Tile tile : gb.getTiles()) {
             tile.setStyle(null);
@@ -166,6 +139,7 @@ public class BoardView extends Application {
                         }
                         chessClient.setMove(new Move(from, to));
                         movePiece(new Move(from, to), img);
+                        resetMoveHandler();
                     }
                     cleanUpTile(moves);
                     ev.consume();
@@ -176,8 +150,7 @@ public class BoardView extends Application {
         e.consume();
     }
 
-    private void movePiece(Move m, ImageView img) {
-        System.out.println("making move");
+    public static void movePiece(Move m, ImageView img) {
         Tile t1 = gb.getTile(m.getFrom() % 8, m.getFrom() / 8);
         Tile t2 = gb.getTile(m.getTo() % 8, m.getTo() / 8);
 
@@ -185,9 +158,7 @@ public class BoardView extends Application {
         t2.setImage(img.getImage().getUrl());
         t1.setImage(null);
         t2.setPiece(t1.getPiece());
-        System.out.println(t2.getPiece());
         t1.setPiece(null);
-        System.out.println(t1.getPiece());
     }
 
     //Change piece in destined position and change the image of the tile
@@ -205,7 +176,13 @@ public class BoardView extends Application {
         cleanUpTile(moves);
         ev.consume();
         e.consume();
+        resetMoveHandler();
         return new Move(from, to);
+    }
+
+    private void resetMoveHandler() {
+        serverMovesHandler = new ServerMovesHandler(chessClient,gb);
+        new Thread(serverMovesHandler).start();
     }
 
     private int changeto1D(int x, int y) {

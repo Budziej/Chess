@@ -2,26 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f0f4c33-73cf-49bc-b586-94648c1bc368" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/blazejprzyluski/chess/client/ServerMovesHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chess.iml" beforeDir="false" afterPath="$PROJECT_DIR$/chess.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chess/module-info.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/blazejprzyluski/chess/Board/GameBoard.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/blazejprzyluski/chess/Board/Tile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/blazejprzyluski/chess/GUI/BoardView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/blazejprzyluski/chess/Logic/GameLogic.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/blazejprzyluski/chess/Pieces/Beat.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/blazejprzyluski/chess/Pieces/Bishop.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/blazejprzyluski/chess/Pieces/Color.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/blazejprzyluski/chess/Pieces/King.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/blazejprzyluski/chess/Pieces/Knight.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/blazejprzyluski/chess/Pieces/Move.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/blazejprzyluski/chess/Pieces/Pawn.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/blazejprzyluski/chess/Pieces/Piece.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/blazejprzyluski/chess/Pieces/Queen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/blazejprzyluski/chess/Pieces/Rook.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/module-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/blazejprzyluski/chess/GUI/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/blazejprzyluski/chess/GUI/BoardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/blazejprzyluski/chess/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/blazejprzyluski/chess/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,7 +51,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/blazejprzyluski/chess" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../javafx-sdk-11.0.2/lib/javafx.web.jar!/" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -213,6 +201,7 @@
       <workItem from="1578163648342" duration="1902000" />
       <workItem from="1578312059360" duration="13347000" />
       <workItem from="1578423570753" duration="1101000" />
+      <workItem from="1579852130316" duration="13747000" />
     </task>
     <servers />
   </component>
@@ -246,8 +235,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/blazejprzyluski/chess/GUI/BoardView.java</url>
-          <line>145</line>
+          <line>118</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/blazejprzyluski/chess/GUI/BoardView.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
